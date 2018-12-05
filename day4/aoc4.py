@@ -31,3 +31,39 @@ def parseInputs(line):
         lineType = "asleep"
     return ts, lineType, id
 
+
+def minuteBins(startMin, endMin):
+    bins = []
+    if endMin > startMin:
+        startMin = startMin + 60
+
+    current = startMin
+    while current > endMin:
+        current += -1
+        bins.append(current % 60)
+    return bins
+
+
+print(minuteBins(5, 2))
+
+print(minuteBins(6, 55))
+
+# list comp to pull out the minutes
+def binList(inputValues):
+
+    binList = []
+
+    for i in range(len(inputValues)):
+        if i == 0:
+            #print("skip")
+            pass
+        else:
+            binList.append(minuteBins(int(inputValues[i][15:17]), int(inputValues[i-1][15:17])))
+    return binList
+
+
+# TODO make sure list is in order
+
+binTimes = binList(exampleValues)
+
+print(binTimes)
